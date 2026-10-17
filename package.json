@@ -1,0 +1,10 @@
+{
+  "name": "inventario-residencial",
+  "version": "1.1.1",
+  "private": true,
+  "description": "Protótipo web para inventário residencial e conferência de mudanças.",
+  "type": "module",
+  "scripts": { "start": "node scripts/serve.mjs", "test": "node --test", "test:browser": "node scripts/browser-qa.cjs" },
+  "devDependencies": { "playwright": "1.62.1" },
+  "engines": { "node": ">=20" }
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f5f7f9"><meta name="description" content="Organize os objetos da casa, identifique suas caixas e confira cada unidade durante a mudança. Protótipo experimental com dados locais.">
+  <title>Casa em Ordem · Inventário residencial</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="assets/icon-192.png">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('casa-theme')||'light'}catch(e){}</script>
+  <link rel="stylesheet" href="styles.css"><script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Pular para o conteúdo</a>
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m3 7 9-4 9 4v10l-9 4-9-4Zm0 0 9 4 9-4M12 11v10M7 5l10 4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><rect x="5" y="4" width="15" height="17" rx="2"/><path d="M9 4V2h7v2M9 10h7M9 15h7"/></symbol>
+    <symbol id="i-data" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 15v5h16v-5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-fragile" viewBox="0 0 24 24"><path d="M7 3h10v5a5 5 0 0 1-10 0ZM12 13v8M8 21h8M12 3l-2 5h4l-2 4"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m15 4 5 5M4 20l5-1L21 7l-5-5L4 14Z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1 1M18 18l1 1M5 19l1-1M18 6l1-1"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v1"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 5h12v12H2ZM14 9h4l4 4v4h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 4h7l2 2 2-2h7v15h-7l-2 2-2-2H3ZM12 6v15"/></symbol>
+  </defs></svg>
+  <aside class="sidebar">
+    <a class="logo" href="#inventario"><span class="logo-symbol"><svg class="icon"><use href="#i-home"/></svg></span><span>Casa em Ordem<small>INVENTÁRIO RESIDENCIAL</small></span></a>
+    <div class="workspace-label">MEU ESPAÇO</div>
+    <nav aria-label="Navegação principal" class="navigation">
+      <a href="#inventario" data-view="inventario"><svg class="icon"><use href="#i-grid"/></svg><span>Inventário</span><span id="nav-count" class="nav-count">0</span></a>
+      <a href="#caixas" data-view="caixas"><svg class="icon"><use href="#i-box"/></svg><span>Caixas</span></a>
+      <a href="#conferencia" data-view="conferencia"><svg class="icon"><use href="#i-list"/></svg><span>Conferência</span></a>
+      <a href="#dados" data-view="dados"><svg class="icon"><use href="#i-data"/></svg><span>Dados e ajuda</span></a>
+    </nav>
+    <div class="sidebar-note"><span class="small-icon">↗</span><strong>Um passo de cada vez.</strong><p>Organize na origem.<br>Confira no destino.</p></div>
+    <div class="sidebar-bottom"><span class="experimental">PROJETO EXPERIMENTAL</span><p>Versão web para testes.<br>Futura versão nativa Android.</p><button id="theme-toggle" class="theme-button" type="button"><svg class="icon"><use href="#i-sun"/></svg><span>Alternar tema</span></button></div>
+  </aside>
+  <div class="app-shell">
+    <header class="topbar"><div class="breadcrumb"><svg class="icon"><use href="#i-home"/></svg><span>Meu espaço</span><span>/</span><strong id="breadcrumb-title">Inventário</strong></div><div class="topbar-actions"><span id="connection-status" class="connection"><span></span>Dados neste navegador</span><button class="icon-button mobile-theme" id="mobile-theme" type="button" aria-label="Alternar tema"><svg class="icon"><use href="#i-sun"/></svg></button><button id="export-pdf" class="button subtle" type="button" aria-label="Exportar inventário em PDF"><span aria-hidden="true" class="pdf-icon">PDF</span><span>Exportar PDF</span></button><button id="export-top" class="button subtle" type="button" aria-label="Exportar backup JSON"><svg class="icon"><use href="#i-data"/></svg><span>Exportar backup</span></button></div></header>
+    <div id="global-error" class="global-error" role="alert" hidden></div>
+    <main id="main" class="main" tabindex="-1"></main>
+    <footer class="app-footer"><span>Casa em Ordem · versão experimental 1.1</span><span>Feito para testar uma ideia. Construído por Valter Murilo Belluzzo.</span></footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="item-dialog" aria-labelledby="item-dialog-title">
+    <form id="item-form"><div class="dialog-header"><div><p class="eyebrow">INVENTÁRIO</p><h2 id="item-dialog-title">Adicionar objeto</h2></div><button type="button" class="icon-button" data-close aria-label="Fechar formulário">✕</button></div>
+      <p class="dialog-intro">Cadastre um objeto ou um grupo de unidades iguais, como 8 pratos.</p>
+      <input type="hidden" name="id">
+      <label>Nome do objeto <span aria-hidden="true">*</span><input name="name" required maxlength="100" placeholder="Ex.: Pratos de jantar" autocomplete="off"></label>
+      <div class="form-grid"><label>Cômodo <span aria-hidden="true">*</span><select name="room" required></select></label><label>Categoria <span aria-hidden="true">*</span><select name="category" required></select></label></div>
+      <div class="form-grid"><label>Quantidade total <span aria-hidden="true">*</span><input name="quantity" type="number" min="1" max="99999" step="1" required value="1" inputmode="numeric"></label><label>Caixa<select name="boxId"></select></label></div>
+      <label class="checkbox-label"><input name="fragile" type="checkbox"><span>Objeto frágil · precisa de cuidado no transporte</span></label>
+      <fieldset class="progress-fields"><legend>Andamento por unidade</legend><p>Conferidos ≤ transportados ≤ embalados ≤ quantidade total.</p><div class="three-columns"><label>Embalados<input name="packed" type="number" min="0" max="99999" step="1" value="0" required inputmode="numeric"></label><label>Transportados<input name="transported" type="number" min="0" max="99999" step="1" value="0" required inputmode="numeric"></label><label>Conferidos<input name="checked" type="number" min="0" max="99999" step="1" value="0" required inputmode="numeric"></label></div></fieldset>
+      <label>Observações<textarea name="notes" maxlength="600" rows="3" placeholder="Cuidados, identificação ou detalhes para lembrar."></textarea></label>
+      <p id="item-form-error" class="form-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button class="button secondary" type="button" data-close>Cancelar</button><button class="button primary" type="submit">Salvar objeto</button></div>
+    </form>
+  </dialog>
+  <dialog id="box-dialog" aria-labelledby="box-dialog-title"><form id="box-form"><div class="dialog-header"><div><p class="eyebrow">ORGANIZAÇÃO</p><h2 id="box-dialog-title">Adicionar caixa</h2></div><button type="button" class="icon-button" data-close aria-label="Fechar formulário">✕</button></div><input type="hidden" name="id"><label>Nome ou etiqueta <span aria-hidden="true">*</span><input name="name" required maxlength="60" placeholder="Ex.: CX-01 · Cozinha"></label><label>Cômodo de destino<input name="destination" maxlength="100" placeholder="Ex.: Cozinha do apartamento novo"></label><label>Situação da caixa<select name="status"><option value="preparando">A preparar</option><option value="transporte">Em transporte</option><option value="destino">No destino</option></select></label><p class="note">A situação da caixa é independente das quantidades dos objetos. Uma caixa no destino ainda precisa ter seu conteúdo conferido.</p><p id="box-form-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button class="button secondary" type="button" data-close>Cancelar</button><button class="button primary" type="submit">Salvar caixa</button></div></form></dialog>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title"><form id="confirm-form"><div class="dialog-header"><h2 id="confirm-title">Confirmar ação</h2><button type="button" class="icon-button" data-close aria-label="Cancelar ação">✕</button></div><p id="confirm-message"></p><label id="confirm-typed-label" hidden>Digite APAGAR para confirmar<input id="confirm-typed" autocomplete="off"></label><p id="confirm-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button class="button secondary" type="button" data-close>Cancelar</button><button id="confirm-submit" class="button primary" type="submit">Confirmar</button></div></form></dialog>
+  <input type="file" id="import-file" accept=".json,application/json" hidden>
+  <dialog id="backup-dialog" aria-labelledby="backup-title"><div class="dialog-header"><h2 id="backup-title">Conteúdo do backup</h2><button type="button" class="icon-button" data-close aria-label="Fechar backup">✕</button></div><p class="note">Se o navegador bloquear o download, selecione o texto e salve-o em um arquivo com extensão .json. Esse arquivo poderá ser importado depois.</p><label>JSON do inventário<textarea id="backup-text" rows="12" readonly spellcheck="false"></textarea></label><div class="dialog-actions"><button id="select-backup" class="button secondary" type="button">Selecionar texto</button><button class="button primary" type="button" data-close>Fechar</button></div></dialog>
+  <script>if(location.protocol==='file:'){const message=document.getElementById('global-error');message.textContent='Para iniciar o sistema, execute npm start na pasta do projeto e abra http://127.0.0.1:4173/. O navegador não permite carregar os módulos diretamente pelo arquivo.';message.hidden=false;}</script>
+  <noscript><p class="global-error">Ative o JavaScript para usar o inventário. Seus dados são guardados apenas neste navegador.</p></noscript>
+</body>
+</html>
