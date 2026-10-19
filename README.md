@@ -1,8 +1,6 @@
 # Casa em Ordem
 
-Inventário residencial para organizar objetos e conferir uma mudança, feito em JavaScript, HTML e CSS. A interface se adapta a computadores e celulares e tem temas claro e escuro.
-
-**Projeto experimental para testes e aprendizado.** A intenção do autor, Valter Murilo Belluzzo, é refazer o sistema como aplicativo nativo para Android após validar o fluxo. Esta entrega é uma aplicação web, não um aplicativo Android nativo.
+Inventário residencial para organizar objetos e conferir uma mudança. A interface se adapta a computadores e celulares e tem temas claro e escuro.
 
 ## Executar
 
@@ -41,21 +39,22 @@ Exporte backups regularmente. Limpar dados do site ou usar navegação privada p
 
 A regra principal é `0 ≤ conferidos ≤ transportados ≤ embalados ≤ quantidade total`. Uma caixa no destino **não** confere seu conteúdo automaticamente. As pendências indicam unidades não conferidas; não comprovam perda.
 
-## Testes
+## Como utilizar
 
-```powershell
-npm test
-```
+1. Em **Dados e ajuda**, defina o nome da mudança e cadastre os cômodos.
+2. Em **Caixas**, crie as etiquetas e identifique as caixas físicas com os mesmos nomes.
+3. Em **Inventário**, clique em **Adicionar objeto** e informe quantidade, cômodo, categoria e caixa, quando houver.
+4. Atualize as quantidades embaladas e transportadas conforme a mudança avança. Use **Editar** para corrigir os dados ou ajustar várias unidades de uma vez.
+5. Em **Conferência**, filtre por caixa ou cômodo e clique em **Conferir +1** após verificar cada unidade fisicamente.
+6. Exporte backups JSON regularmente e use **Exportar PDF** quando precisar de uma lista para conferir no papel.
 
-Os testes usam o executor nativo do Node.js. A biblioteca pdf-lib 1.17.1 está incluída em `vendor/`, sob licença MIT, para gerar PDFs localmente e offline. Não é necessário instalar pacotes. Consulte [Plano de testes](docs/TESTES.md).
+Para experimentar, use **Explorar demonstração** no primeiro acesso. A demonstração substitui o inventário após confirmação.
 
-## Documentação
+Consulte o [Guia de uso](docs/USO.md) para instruções detalhadas sobre edição, exclusão, backups, impressão e problemas comuns.
 
-- [Guia de uso](docs/USO.md)
-- [Arquitetura e regras](docs/ARQUITETURA.md)
-- [Plano de testes](docs/TESTES.md)
-- [Relatório de validação e limitações](docs/RELATORIO_VALIDACAO.md)
-- [Evolução e apresentação no portfólio](docs/EVOLUCAO.md)
+## Uso no celular e offline
+
+A barra inferior alterna entre inventário, caixas, conferência e ajuda. Para usar offline, carregue a aplicação com conexão em um endereço HTTPS ou localhost, aguarde a ativação do cache e abra novamente para verificar o acesso sem internet. Alguns navegadores permitem **Instalar aplicativo** ou **Adicionar à tela inicial**.
 
 ## Limites desta versão
 
